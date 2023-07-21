@@ -9,22 +9,30 @@
 </head>
 
 <body>
-    <div id="#board"></div>
-
+    <div id="board"></div>
 
     <script>
-        // Crée un div dans "#board"
-        const board = document.querySelector("div")// Crée un div dans "#board"
-        const titre = document.createElement('h2')// Crée un titre h2 dans le div
-        const champ = document.createElement('input') // Crée un input dans le div
+        const board = document.querySelector("div") // selectionne le div #board
+        const titre = document.createElement("h2") // Crée un titre h2 dans le div
+        const champ = document.createElement("input") // Crée un input dans le div
         const franc = document.createElement("p") // Crée un paragraph dans le div
         titre.innerText = "Valeur eu euros"
+        board.appendChild(titre) // ajoute le h2 dans le div
+        board.appendChild(champ) // ajoute le input dans le div
+        board.appendChild(franc) // ajoute le p dans le div
 
-        board.appendChild(titre)
-        board.appendChild(champ)
-        board.appendChild(franc)
+        champ.addEventListener("input", function () { // ajoute un eventListener a input
+            if (champ === "") { // si le champ est vide
+                franc.innerText = ""
+            } else if (!isNaN(champ.value)) { // si le champ est un nombre
+                const euros = parseFloat(champ.value) // converti le champ en nombre
+                franc.innerText = (euros * 6.55957).toFixed(2) + " Francs" // affiche le resultat
+            } else {
+                franc.innerText = "Saisissez une valeur numérique" // sinon affiche un message d'erreur
+            }
+        })
     </script>
 
-</body>
-
 </html>
+
+</body>
